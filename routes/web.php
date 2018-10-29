@@ -20,4 +20,5 @@ $router->group(['prefix' => 'api'], function (Laravel\Lumen\Routing\Router $rout
 	});
 });
 
-$router->get('/app{any:.*}', 'SpaController@index');
+$router->get('/', function () { return redirect('/app'); });
+$router->get('/app{any:.*}', ['as' => 'home', 'uses' => 'SpaController@index']);
