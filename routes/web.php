@@ -12,10 +12,11 @@
 */
 /** @var \Laravel\Lumen\Routing\Router $router */
 $router->group(['prefix' => 'api'], function (Laravel\Lumen\Routing\Router $router) {
-	$router->get('/', function () {
+	$router->get('/', function (\App\Support\Contracts\AppInfoInterface $info) {
 		return [
-			'name' => 'Depend (Private Composer Repository)',
-			'version' => '0.1.0-dev'
+			'name' => $info->name(),
+			'tag_name' => $info->tagName(),
+			'version' => $info->version()
 		];
 	});
 });

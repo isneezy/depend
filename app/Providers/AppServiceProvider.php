@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Schema;
+use App\Support\AppInfo;
+use App\Support\Contracts\AppInfoInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     }
 
     public function boot () {
-	    config()->set('database.connections.mysql.engine', 'InnoDB');
+	    config()->set( 'database.connections.mysql.engine', 'InnoDB' );
+	    /** @noinspection PhpParamsInspection */
+	    $this->app->instance( AppInfoInterface::class, new AppInfo($this->app));
     }
 }
